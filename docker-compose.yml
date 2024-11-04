@@ -21,7 +21,6 @@ services:
     - 5.owaspctf.gq
     - 6.owaspctf.gq
     - 7.owaspctf.gq
-    - 8.owaspctf.gq
     - 9.owaspctf.gq
     - 10.owaspctf.gq
     - 11.owaspctf.gq
@@ -100,13 +99,6 @@ services:
     - "80"
   7.owaspctf.gq:
     build: ./007roulette/.
-    restart: always
-    mem_limit: 2gb
-    cpu_count: 1
-    expose:
-    - "80"
-  8.owaspctf.gq:
-    build: ./008ssrf/.
     restart: always
     mem_limit: 2gb
     cpu_count: 1
