@@ -1,4 +1,0 @@
-zone "owaspukraine.org" {
-      type master;
-      file "/etc/bind/vulhub.db";
-};

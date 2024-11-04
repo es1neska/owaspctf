@@ -28,9 +28,6 @@ services:
     - 12.owaspctf.gq
     - 13.owaspctf.gq
     - 14.owaspctf.gq
-    - 015googleauthdns
-    - 15.owaspctf.gq
-    - 16.owaspctf.gq
     - dom.owaspctf.gq
     - 18.owaspctf.gq
     - insta.owaspctf.gq
@@ -172,31 +169,6 @@ services:
     - "80"
   14.owaspctf.gq:
     build: ./014hackinggame/.
-    restart: always
-    mem_limit: 2gb
-    cpu_count: 1
-    expose:
-    - "80"
-  015googleauthdns:
-   image: vulhub/bind:latest
-   restart: always
-   mem_limit: 2gb
-   cpu_count: 1
-   expose:
-    - "53/tcp"
-    - "53/udp"
-   volumes:
-    - ./015googleauth/named.conf.local:/etc/bind/named.conf.local
-    - ./015googleauth/vulhub.db:/etc/bind/vulhub.db
-  15.owaspctf.gq:
-    build: ./015googleauth/.
-    restart: always
-    mem_limit: 2gb
-    cpu_count: 1
-    expose:
-        - "80"
-  16.owaspctf.gq:
-    build: ./016nginx/.
     restart: always
     mem_limit: 2gb
     cpu_count: 1
