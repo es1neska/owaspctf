@@ -14,7 +14,18 @@ ENV LUAJIT_INC=/usr/include/luajit-2.1
 
 # resolves #166
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community gnu-libiconv
+
+# Install necessary dependencies for building gnu-libiconv
+RUN apk update && apk add --no-cache build-base wget
+
+# Download, build, and install gnu-libiconv from source
+RUN wget https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz && \
+    tar -xzf libiconv-1.16.tar.gz && \
+    cd libiconv-1.16 && \
+    ./configure --prefix=/usr/local && \
+    make && make install && \
+    cd .. && rm -rf libiconv-1.16 libiconv-1.16.tar.gz
+
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
