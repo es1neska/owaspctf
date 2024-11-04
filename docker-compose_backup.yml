@@ -1,0 +1,241 @@
+version: '2.3'
+services:
+  nginx:
+    image: nginx
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 4
+    ports:
+      - "80:80"        # HTTP
+      - "443:443"      # HTTPS
+      - "53:53"        # DNS
+      - "53:53/udp"    # DNS
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/ssl/private
+    links:
+      - "service_1"
+      - "service_2"
+      - "service_3"
+      - "service_4"
+      - "service_5"
+      - "service_6"
+      - "service_7"
+      - "service_8"
+      - "service_9"
+      - "service_10"
+      - "service_11"
+      - "service_12"
+      - "service_13"
+      - "service_14"
+      - "service_18"
+      - "service_20"
+      - "service_21"
+      - "service_22"
+      - "service_23"
+      - "service_24"
+      - "service_25"
+
+  service_1:
+    build: ./001lfihashes/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8001:80"
+
+  service_2:
+    build: ./002shoppingcart/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8002:80"
+    links:
+      - "service_2_db"
+  service_2_db:
+    image: mysql:8.0
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    expose:
+      - "3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: myDb
+      MYSQL_USER: not_brutforsable_user
+      MYSQL_PASSWORD: not_brutforsable_password
+      MYSQL_ROOT_PASSWORD: not_brutforsable_password
+    volumes:
+      - ./002shoppingcart/dump:/docker-entrypoint-initdb.d
+      - ./002shoppingcart/conf:/etc/mysql/conf.d
+
+  service_3:
+    build: ./003fileupload/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8003:80"
+
+  service_4:
+    build: ./004emoji/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8004:80"
+
+  service_5:
+    build: ./005fileuploadtmp/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8005:80"
+
+  service_6:
+    build: ./006hashcollision/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8006:80"
+
+  service_7:
+    build: ./007roulette/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8007:80"
+
+  service_8:
+    build: ./008ssrf/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8008:80"
+
+  service_9:
+    build: ./009xxe/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8009:8080"
+
+  service_10:
+    build: ./010base64/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8010:80"
+
+  service_11:
+    build: ./011serealize/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8011:80"
+
+  service_12:
+    build: ./012selectsql/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8012:80"
+    links:
+      - "service_12_db"
+  service_12_db:
+    image: mysql:8.0
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    expose:
+      - "3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: myDb
+      MYSQL_USER: not_brutforsable_user
+      MYSQL_PASSWORD: not_brutforsable_password
+      MYSQL_ROOT_PASSWORD: not_brutforsable_password
+    volumes:
+      - ./012selectsql/dump:/docker-entrypoint-initdb.d
+      - ./012selectsql/conf:/etc/mysql/conf.d
+
+  service_13:
+    build: ./013captcha/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8013:80"
+
+  service_14:
+    build: ./014hackinggame/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8014:80"
+
+  service_18:
+    build: ./018resetpass/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8018:80"
+
+  service_20:
+    build: ./020accesslog/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8020:80"
+
+  service_21:
+    build: ./021guessthenumber/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8021:8000"
+
+  service_22:
+    build: ./022bloglfi/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8022:80"
+
+  service_23:
+    build: ./023vb/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8023:80"
+
+  service_24:
+    build: ./024apk/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8024:80"
+
+  service_25:
+    build: ./025easysql/
+    restart: always
+    mem_limit: 2gb
+    cpu_count: 1
+    ports:
+      - "8025:80"
