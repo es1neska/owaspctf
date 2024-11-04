@@ -1,12 +1,16 @@
 FROM php:7.4-apache
-run apt-get update && apt-get install libfontconfig nano -y
+
+# Install necessary dependencies and PHP extensions
+RUN apt-get update && apt-get install -y \
+    libfontconfig \
+    nano \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) iconv gd \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy application files and PHP configuration
 COPY src/ /var/www/html/
 COPY config/php.ini /usr/local/etc/php/
-RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng-dev \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd
