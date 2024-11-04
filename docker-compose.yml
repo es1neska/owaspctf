@@ -28,9 +28,7 @@ services:
     - 12.owaspctf.gq
     - 13.owaspctf.gq
     - 14.owaspctf.gq
-    - dom.owaspctf.gq
     - 18.owaspctf.gq
-    - insta.owaspctf.gq
     - 20.owaspctf.gq
     - 21.owaspctf.gq
     - 22.owaspctf.gq
@@ -174,22 +172,8 @@ services:
     cpu_count: 1
     expose:
     - "80"
-  dom.owaspctf.gq:
-    build: ./017domxss/.
-    restart: always
-    mem_limit: 2gb
-    cpu_count: 1
-    expose:
-    - "80"
   18.owaspctf.gq:
     build: ./018resetpass/.
-    restart: always
-    mem_limit: 2gb
-    cpu_count: 1
-    expose:
-    - "80"
-  insta.owaspctf.gq:
-    build: ./019insta/.
     restart: always
     mem_limit: 2gb
     cpu_count: 1
