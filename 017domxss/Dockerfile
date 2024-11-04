@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
 run apt-get update && apt-get install libfontconfig gnupg nano python git wget -y
 COPY opt/ /opt/
 RUN tar xvjC /opt/ -f /opt/phantom.tar.bz2
