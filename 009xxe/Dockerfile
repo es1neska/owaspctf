@@ -1,12 +1,15 @@
 FROM ubuntu:20.04
 
-MAINTAINER Gabe Marshall <gabemarshall@me.com>
+LABEL maintainer="Gabe Marshall <gabemarshall@me.com>"
 
-RUN apt-get -yqq --force-yes update
-RUN apt-get -yqq --force-yes install openjdk-6-jdk 
-RUN apt-get -yqq --force-yes install maven gopher
+# Update and install dependencies
+RUN apt-get -yqq update && \
+    apt-get -yqq install --allow-unauthenticated openjdk-8-jdk maven gopher && \
+    rm -rf /var/lib/apt/lists/*
 
+# Copy project files and add FLAG to /etc/passwd
 COPY ./ ./
 RUN echo 'FLAG{Xuman_Like_Machines}' >> /etc/passwd
 
+# Start the application
 CMD ["mvn", "jetty:run"]
