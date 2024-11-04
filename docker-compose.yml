@@ -21,7 +21,6 @@ services:
       - "service_5"
       - "service_6"
       - "service_7"
-      - "service_8"
       - "service_9"
       - "service_10"
       - "service_11"
@@ -109,14 +108,6 @@ services:
     cpu_count: 1
     ports:
       - "8007:80"
-
-  service_8:
-    build: ./008ssrf/
-    restart: always
-    mem_limit: 2gb
-    cpu_count: 1
-    ports:
-      - "8008:80"
 
   service_9:
     build: ./009xxe/
